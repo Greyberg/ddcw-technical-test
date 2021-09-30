@@ -6,7 +6,7 @@ class MessageServiceSpec extends UnitSpec {
 
   private val messageService = new MessageService
 
-  "MessageService" should {
+  "MessageService" - {
 
     "return a response that indicates message received was printed" in {
 
