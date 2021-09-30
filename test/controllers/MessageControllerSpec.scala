@@ -10,7 +10,7 @@ class MessageControllerSpec extends ControllerTestResources {
   private val mockMessageService = mock[MessageService]
   private val messageController = new MessageController(mockMessageService, mockCC)
 
-  "MessageController POST /print" should {
+  "MessageController POST /print" - {
 
     "return a response that indicates message received was printed" in {
       (mockMessageService.printToTerminal(_: String)).expects(*).returns(s"Printed '$message1' to terminal")
