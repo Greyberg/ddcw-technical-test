@@ -11,7 +11,7 @@ class MessageService {
   def doTheStuff(message: Message): String = {
     println(message)
     message match {
-      case input if input.value.startsWith("deposit") => {
+      case input if input.message.startsWith("deposit") => {
           validated(input) match {
             case Success(value) =>
               (currentBalance += value)
@@ -20,7 +20,7 @@ class MessageService {
           }
 
       }
-      case input if input.value.startsWith("withdraw") => {
+      case input if input.message.startsWith("withdraw") => {
         validated(input) match {
             case Success(value) if (value <= currentBalance) => {
               (currentBalance -= value)
@@ -30,7 +30,7 @@ class MessageService {
             case Failure(e) => s"failed, enter a number, have an exception: $e"
           }
       }
-      case input if input.value.startsWith("balance") => {
+      case input if input.message.startsWith("balance") => {
         (currentBalance).toString
       }
       case input => {
@@ -40,7 +40,7 @@ class MessageService {
   }
 
   def validated(input: Message): Try[Int] = {
-     val amount = input.value.split(" ").last
+     val amount = input.message.split(" ").last
      Try(amount.toInt)
   }
 }

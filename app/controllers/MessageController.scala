@@ -11,7 +11,7 @@ import javax.inject._
 class MessageController @Inject()(messageService: MessageService, cc: ControllerComponents) extends AbstractController(cc) {
 
   val printMessage: Action[JsValue] = Action(parse.json) { implicit request =>
-    Ok(messageService.doTheStuff((request.body \ "message").as[Message]))
+    Ok(messageService.doTheStuff((request.body).as[Message]))
   }
 
 }
