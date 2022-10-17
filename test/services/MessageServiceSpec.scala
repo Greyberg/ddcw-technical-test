@@ -1,5 +1,6 @@
 package services
 
+import models.Message
 import support.UnitSpec
 
 class MessageServiceSpec extends UnitSpec {
@@ -8,11 +9,32 @@ class MessageServiceSpec extends UnitSpec {
 
   "MessageService" - {
 
-    "return a response that indicates message received was printed" in {
+    "recognise deposit as a Deposit" in {
 
-      val response = messageService.printToTerminal("Test1")
+      val response = messageService.doTheStuff(Message("deposit 1000"))
 
-      response shouldBe s"Printed 'Test1' to terminal"
+      response shouldBe s"You deposited: 1000"
+    }
+
+    "recognise withdraw as a Withdrawal" in {
+
+      val response = messageService.doTheStuff(Message("withdraw 1000"))
+
+      response shouldBe s"You have withdrawn: 1000"
+    }
+
+    "recognise balance as a request for the balance" in {
+
+      val response = messageService.doTheStuff(Message("balance"))
+
+      response shouldBe s"0"
+    }
+
+    "not recognise other requests" in {
+
+      val response = messageService.doTheStuff(Message("???"))
+
+      response shouldBe s"I didn't understand Message(???)"
     }
 
   }

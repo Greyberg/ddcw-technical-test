@@ -1,6 +1,6 @@
 package controllers
 
-import play.api.libs.json.Json
+import models.Message
 import play.api.test.Helpers._
 import play.api.test._
 import services.MessageService
@@ -13,7 +13,7 @@ class MessageControllerSpec extends ControllerTestResources {
   "MessageController POST /print" - {
 
     "return a response that indicates message received was printed" in {
-      (mockMessageService.printToTerminal(_: String)).expects(*).returns(s"Printed '$message1' to terminal")
+      (mockMessageService.doTheStuff(_: Message)).expects(*).returns(s"Printed '$message1' to terminal")
 
       val request = messageController.printMessage.apply(FakeRequest().withBody(messageJson))
 
